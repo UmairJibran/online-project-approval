@@ -1,3 +1,7 @@
+<?php
+    require_once("../server/connection.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +47,27 @@
             </form>
         </div>
         <br><br><br>
+        <?php
+            if(isset($_POST['register'])){
+                $fName = $_POST['studentFName'];
+                $lName = $_POST['studentLName'];
+                $email = $_POST['studentEmail'];
+                $pwd = $_POST['pwd'];
+                $sql = "INSERT INTO `student_record` (`student_ID`, `student_EMAIL`, `student_FIRST_NAME`, `student_LAST_NAME`, `student_PASSWORD`) VALUES (NULL, '${email}', '${fName}', '${lName}', '${pwd}')";
+                if ($conn->query($sql) === TRUE) {
+                    $last_id = $conn->insert_id;
+                    echo '<div class="alert alert-success center" role="alert">Account Created Successfully, Your ID is: '.$last_id.'</div>';
+                    $_SESSION['logged_in'] = true;
+                    $_SESSION['role'] = 'student';
+                    $_SESSION['fname'] = $fName;
+                    $_SESSION['lname'] = $lName;
+                    $_SESSION['email'] = $email;
+                } else {
+                    echo '<div class="alert alert-danger center" role="alert" >'. $conn->error .'</div>';
+                }
+                $conn->close();
+            }
+        ?>
     </div>
 </body>
 </html>
