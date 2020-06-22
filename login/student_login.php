@@ -1,10 +1,3 @@
-<?php
-    require_once("../server/connection.php");
-    if(isset($_COOKIE["logged_in"])){
-        header("location:./student/");
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,28 +37,3 @@
     </div>
 </body>
 </html>
-
-<?php
-    if(isset($_POST["login"])){
-        $sid = $_POST["studentID"];
-        $pwd = $_POST["pwd"];
-        $query = "SELECT * WHERE `student_ID` = '${sid}' AND `student_PASSWORD` = '${pwd}'";
-        $result = $conn->query($query);
-        $rows = $result->num_rows;
-        if ($rows == 1) {
-            $data = $result->fetch_assoc();
-            $studentEmail = $data["student_EMAIL"];
-            setcookie("student_email","${studentEmail}",time()+3600);
-            setcookie("logged_in",true,time()+3600);
-            print $_COOKIE["student_email"];
-            print $_COOKIE['logged_in'];
-        }else{
-            $error = $conn->error;
-            echo "
-            <div class='alert alert-danger center' role='alert'>
-                ".$error. "
-            </div>                    
-            ";
-        }
-    }
-?>

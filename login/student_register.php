@@ -1,10 +1,3 @@
-<?php
-    require_once("../server/connection.php");
-    if(isset($_COOKIE["logged_in"])){
-        header("location:./student/");
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,34 +43,6 @@
             </form>
         </div>
         <br><br><br>
-        <?php
-            if(isset($_POST['register'])){
-                $fName = $_POST['studentFName'];
-                $lName = $_POST['studentLName'];
-                $studentEmail = $_POST['studentEmail'];
-                $pwd = $_POST['pwd'];
-                $query = "INSERT INTO `student_table` (`student_ID`, `student_FIRST_NAME`, `student_LAST_NAME`, `student_EMAIL`, `student_PASSWORD`) VALUES (NULL, '${fName}', '${lName}', '${studentEmail}' , '${pwd}')";
-                if ($conn->query($query) === TRUE) {
-                    echo '
-                    <div class="alert alert-success" role="alert">
-                        Student Registered
-                    </div>
-                    ';
-                    setcookie("student_email","${studentEmail}",time()+3600);
-                    setcookie("logged_in",true,time()+3600);
-                    print $_COOKIE["student_email"];
-                    print $_COOKIE['logged_in'];
-                  } 
-                else {
-                    $error = $conn->error;
-                    echo "
-                    <div class='alert alert-danger center' role='alert'>
-                        ".$error. "
-                    </div>                    
-                    ";
-                }
-            }
-        ?>
     </div>
 </body>
 </html>
