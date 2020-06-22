@@ -18,7 +18,7 @@
             <h1 class="center">STUDENT Register</h1>
         </div>
         <nav>
-            <span class="right">HOD? <a href="hod.php">Login</a></span>
+            <span class="right">HOD? <a href="./hod_login.php">Login</a></span>
         </nav>
         <br><br>
         <div class="center-half">
