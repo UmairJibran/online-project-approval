@@ -84,6 +84,7 @@
                 $rows = $result->num_rows;
                 if($rows >= 1){
                     while($data = $result->fetch_assoc()){
+                        $prID = $data['project_ID'];
                         $title = $data['project_TITLE'];
                         $year = $data['project_YEAR'];
                         $hodID = $data['hod_ID'];
@@ -95,36 +96,35 @@
                         $file = $data['project_file'];
                         echo"
                         <tr>
-                            <td>${title}</td>
-                            
+                            <td>${title} ${prID}</td> 
                             <td> <a href = ${file} class='btn btn-info' download>Download</a></td>";
                             echo"<td>${year}</td>";
                         ?>
                         <form action="#" method="post">
                         <?php
-                            echo'
+                            echo"
                             <td>
-                                <input type="text" name="prof" placeholder="Assign Professor" required> 
+                                <input type='text' name='prof${prID}' placeholder='Assign Professor' value='${professor}' required> 
                             </td>
-                            <td><select name="status" class="form-control">
-                                <option value="0">LEAVE</option>
-                                <option value="1">ACCEPT</option>
-                                <option value="2">REJECT</option>
+                            <td><select name='status${prID}' class='form-control'>
+                                <option value='0'>LEAVE</option>
+                                <option value='1'>ACCEPT</option>
+                                <option value='2'>REJECT</option>
                             </select></td>
-                            <td><input type="text" name="comment"  placeholder="Leave Remarks" required></td>
-                            ';
+                            <td><input type='text' name='comment${prID}'  placeholder='Leave Remarks' value='${comment}' required></td>
+                            ";
                             echo"
                                 <td>${course}</td>
                                 <td>${batch}</td>
-                                <td><input type='submit' name='update' class='btn btn-primary'></td>";
+                                <td><input type='submit' name='update${prID}' class='btn btn-primary'></td>";
                                 ?>
                                 </form>
                                 <?php
-                                if(isset($_POST['update'])){
-                                    $prof = $_POST['prof'];
-                                    $status = $_POST['status'];
-                                    $comment = $_POST['comment'];
-                                    $sql = "UPDATE `project_record` SET `project_PROFESSOR` = '${prof}', `project_STATUS` = '${status}' , `project_COMMENT` = '${comment}' WHERE `project_record`.`project_ID` = 1;";
+                                if(isset($_POST['update'.$prID])){
+                                    $prof = $_POST['prof'.$prID];
+                                    $status = $_POST['status'.$prID];
+                                    $comment = $_POST['comment'.$prID];
+                                    $sql = "UPDATE `project_record` SET `project_PROFESSOR` = '${prof}', `project_STATUS` = '${status}' , `project_COMMENT` = '${comment}' WHERE `project_record`.`project_ID` = ${prID};";
                                     $conn->query($sql);
                                 }
                         echo "</tr>";

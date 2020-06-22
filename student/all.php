@@ -70,11 +70,11 @@
                             <td>${professor}</td>
                         ";
                         if($status == 0){
-                            echo "<td>PENDING</td>";
+                            echo "<td><font color='blue'><strong>PENDING</strong></font></td>";
                         }elseif($status == 1){
-                            echo "<td>ACCEPTED</td>";
+                            echo "<td><font color='green'><strong>ACCEPTED</strong></font></td>";
                         }else{
-                            echo "<td>REJECTED</td>";
+                            echo "<td><font color='red'><strong>REJECTED</strong></font></td>";
                         }
                         echo"
                             <td>${comment}</td>
