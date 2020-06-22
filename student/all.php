@@ -20,13 +20,11 @@
 <body>
     <div class="container container-fluid">
         <div class="jumbotron">
-            <h3 class='center'>Student Dashboard</h3>
+            <h3 class='center'>All Projects</h3>
             <small class="right"><?php echo "Welcome " . $studentName ?></small>
         </div>
         <nav class="right">
             <form action="#" method="post">
-                <input type="submit" value="View All Projects" class="btn btn-outline-dark" name="viewall">
-                &nbsp
                 <input type="submit" value="Add New Project" class="btn btn-outline-success" name="add">
                 &nbsp
                 <input type="submit" value="Log Out" class="btn btn-outline-danger" name="logout">
@@ -44,7 +42,7 @@
                 <th>Project Batch</th>
             </tr>
             <?php
-                $sql = "SELECT * FROM `project_record` WHERE `student_ID` = '${stID}';";
+                $sql = "SELECT * FROM `project_record`";
                 $result = $conn->query($sql);
                 $rows = $result->num_rows;
                 if($rows >= 1){
@@ -101,8 +99,5 @@
     }
     if(isset($_POST['add'])){
         header("Location: ./propose.php");
-    }
-    if(isset($_POST['viewall'])){
-        header("Location: ./all.php");
     }
 ?>

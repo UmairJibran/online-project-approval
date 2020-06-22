@@ -114,14 +114,16 @@
                         $fileDestination = '../server/uploads/'.$fileNameNew;
                         move_uploaded_file($fileTempName,$fileDestination);
                         $document = $fileDestination;
-                    }
+                        $sql = "INSERT INTO `project_record` (`project_ID`, `student_ID`, `hod_ID`, `project_TITLE`, `project_YEAR`, `project_PROFESSOR`, `project_BATCH`, `project_COURSE`, `project_COMMENT`, `project_STATUS`, `project_file`) VALUES (NULL, '${stID}', '${hod}', '${title}', '${year}', NULL, '${batch}', '${course}', NULL, '0', '${document}')";
+                        if($conn->query($sql) === true){
+                            header("Location: ./");
+                        }else{
+                            echo '<div class="alert alert-danger center" role="alert" >'. $conn->error .'</div>';
+                        }
+                    }else
+                        echo "Don't upload GIGANTIC FILEs";
                 }
-            }
-            $sql = "INSERT INTO `project_record` (`project_ID`, `student_ID`, `hod_ID`, `project_TITLE`, `project_YEAR`, `project_PROFESSOR`, `project_BATCH`, `project_COURSE`, `project_COMMENT`, `project_STATUS`, `project_file`) VALUES (NULL, '${stID}', '${hod}', '${title}', '${year}', NULL, '${batch}', '${course}', NULL, '0', '${document}')";
-            if($conn->query($sql) === true){
-                header("Location: ./");
-            }else{
-                echo '<div class="alert alert-danger center" role="alert" >'. $conn->error .'</div>';
-            }
+            }else
+                echo "This type is not accepted, please use either pdf,txt or doc";
         }
 ?>

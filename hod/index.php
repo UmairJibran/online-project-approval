@@ -70,13 +70,13 @@
         <caption  class='center'>Approve Projects</caption>
             <tr>
                 <th>Project Title</th>
+                <th>Project FILE</th>
                 <th>Project Year</th>
                 <th>Project Professor(assigned)</th>
                 <th>Project Status</th>
                 <th>Project Comment</th>
                 <th>Project Course</th>
                 <th>Project Batch</th>
-                <th>Project FILE</th>
             </tr>
             <?php
                 $sql = "SELECT * FROM `project_record` WHERE `hod_ID` = '${id}';";
@@ -96,7 +96,9 @@
                         echo"
                         <tr>
                             <td>${title}</td>
-                            <td>${year}</td>";
+                            
+                            <td> <a href = ${file} class='btn btn-info' download>Download</a></td>";
+                            echo"<td>${year}</td>";
                         ?>
                         <form action="#" method="post">
                         <?php
@@ -114,7 +116,6 @@
                             echo"
                                 <td>${course}</td>
                                 <td>${batch}</td>
-                                <td>${file}</td>
                                 <td><input type='submit' name='update' class='btn btn-primary'></td>";
                                 ?>
                                 </form>

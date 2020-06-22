@@ -51,8 +51,7 @@
                     $_SESSION['id'] = $id;
                     header("Location: ./../hod/");
                 } else {
-                    echo 'false';
-                    echo '<div class="alert alert-danger center" role="alert" >'. $conn->error .'</div>';
+                    echo '<div class="alert alert-danger center" role="alert"> Couldn\'t log in '. $conn->error .'</div>';
                 }
                 $conn->close();
             }
