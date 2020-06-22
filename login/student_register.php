@@ -1,3 +1,7 @@
+<?php
+    require_once("../server/connection.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +21,7 @@
         </nav>
         <br><br>
         <div class="center-half">
-            <form>
+            <form method="post">
                 <div class="form-group">
                     <label for="studentFName" class="left">Student First Name</label>
                     <input type="text" name="studentFName" class="form-control" id="studentFName" required>
@@ -27,8 +31,8 @@
                     <input type="text" name="studentLName" class="form-control" id="studentLName" required>
                 </div>
                 <div class="form-group">
-                    <label for="studentID" class="left">Student ID</label>
-                    <input type="number" name="studentID" class="form-control" id="studentID" required>
+                    <label for="studentEmail" class="left">Student Email</label>
+                    <input type="email" name="studentEmail" class="form-control" id="studentEmail" required>
                 </div>
                 <div class="form-group">
                     <label for="pwd" class="left">Password</label>
@@ -38,10 +42,38 @@
                     <a href="./" class="btn btn-outline-secondary">Sign In</a>
                 </div>
                 <div class="right">
-                    <input type="submit" value="Sign Up" class="btn btn-outline-primary">
+                    <input type="submit" name='register' value="Sign Up" class="btn btn-outline-primary">
                 </div>
             </form>
         </div>
+        <br><br><br>
+        <?php
+            if(isset($_POST['register'])){
+                $fName = $_POST['studentFName'];
+                $lName = $_POST['studentLName'];
+                $studentEmail = $_POST['studentEmail'];
+                $pwd = $_POST['pwd'];
+                $query = "INSERT INTO `student_table` (`student_ID`, `student_FIRST_NAME`, `student_LAST_NAME`, `student_EMAIL`, `student_PASSWORD`) VALUES (NULL, '${fName}', '${lName}', '${studentEmail}' , '${pwd}')";
+                if ($conn->query($query) === TRUE) {
+                    echo '
+                    <div class="alert alert-success" role="alert">
+                        Student Registered
+                    </div>
+                    ';
+                    setcookie("student_email","${studentEmail}",time()+3600,0);
+                    setcookie("logged_in",true,time()+3600,0);
+                    print $_COOKIE["student_id"];
+                    print $_COOKIE['logged_in'];
+                  } else {
+                      $error = $conn->error;
+                    echo "
+                    <div class='alert alert-danger center' role='alert'>
+                        ". $error. "
+                    </div>                    
+                    ";
+                  }
+            }
+        ?>
     </div>
 </body>
 </html>
