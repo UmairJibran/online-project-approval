@@ -1,0 +1,16 @@
+.center {
+    text-align: center;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.center-half {
+    width: 500px;
+    margin-left: 300px;
+}
