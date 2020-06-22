@@ -1,5 +1,6 @@
 <?php
-
-    header("location:./login/");
+    // session_start();
+    // session_destroy();
+    header("location:./login/student_login.php");
 
 ?>

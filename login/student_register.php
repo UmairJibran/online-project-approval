@@ -1,9 +1,6 @@
 <?php
     session_start();
-    require_once("../server/connection.php");
-    if(isset($_SESSION['id'])){
-        header("location:./student/");
-    }
+    require_once('../server/connection.php');
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +40,7 @@
                     <input type="password" name="pwd" class="form-control" id="pwd" required>
                 </div>
                 <div class="left">
-                    <a href="./login.php" class="btn btn-outline-secondary">Sign In</a>
+                    <a href="./student_login.php" class="btn btn-outline-secondary">Sign In</a>
                 </div>
                 <div class="right">
                     <input type="submit" name='register' value="Sign Up" class="btn btn-outline-primary">
@@ -67,6 +64,7 @@
                     $_SESSION['email'] = $email;
                     $_SESSION['id'] = $last_id;
                     echo '<div class="alert alert-success center" role="alert">Account Created Successfully, Your ID is: '.$_SESSION['id'].'</div>';
+                    header("Location: ./../student/");
                 } else {
                     echo '<div class="alert alert-danger center" role="alert" >'. $conn->error .'</div>';
                 }

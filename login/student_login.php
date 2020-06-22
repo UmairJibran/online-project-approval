@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    require_once('../server/connection.php');
+    require_once("../header.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +40,25 @@
                 </div>
             </form>
         </div>
+        <br><br><br>
+        <?php
+            if(isset($_POST['login'])){
+                $id = $_POST['studentID'];
+                $pwd = $_POST['pwd'];
+                $sql = "SELECT *  FROM `student_record` WHERE `student_ID` = ${id} AND `student_PASSWORD` = '${pwd}'";
+                $result = $conn->query($sql);
+                $rows = $result->num_rows;
+                if($rows == 1){
+                    $_SESSION['logged_in'] = true;
+                    $_SESSION['role'] = 'student';
+                    header("Location: ./../student/");
+                } else {
+                    echo 'false';
+                    echo '<div class="alert alert-danger center" role="alert" >'. $conn->error .'</div>';
+                }
+                $conn->close();
+            }
+        ?>
     </div>
 </body>
 </html>
