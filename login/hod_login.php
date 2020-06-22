@@ -27,7 +27,7 @@
                     <input type="password" name="pwd" class="form-control" id="pwd" required>
                 </div>
                 <div class="left">
-                    <a href="student_register.php" class="btn btn-outline-secondary">Sign Up</a>
+                    <a href="./student_register.php" class="btn btn-outline-secondary">Sign Up</a>
                 </div>
                 <div class="right">
                     <input type="submit" value="Login" class="btn btn-outline-primary">
