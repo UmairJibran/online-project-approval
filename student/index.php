@@ -2,6 +2,10 @@
     session_start();
     require_once('../server/connection.php');
     $stID = $_SESSION['id'];
+    $sql = "SELECT `student_FIRST_NAME` , `student_LAST_NAME` FROM `student_record` WHERE `student_ID` = '${stID}'";
+    $result = $conn->query($sql);
+    $data = $result->fetch_assoc();
+    $studentName = $data['student_FIRST_NAME'] . " " . $data['student_LAST_NAME'] ;
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +21,7 @@
     <div class="container container-fluid">
         <div class="jumbotron">
             <h3 class='center'>Student Dashboard</h3>
+            <small class="right"><?php echo "Welcome " . $studentName ?></small>
         </div>
         <nav class="right">
             <form action="#" method="post"><input type="submit" value="Add New Project" class="btn btn-outline-success" name="add">&nbsp<input type="submit" value="Log Out" class="btn btn-outline-danger" name="logout"></form><br><br><br>
@@ -48,14 +53,29 @@
                         $batch = $data['project_BATCH'];
                         echo"
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>${title}</td>
+                            <td>${year}</td>
+                        ";
+                        $hodNAME = '';
+                        $sql = "SELECT `hod_FIRST_NAME` , `hod_LAST_NAME` FROM `hod_record` WHERE `hod_ID` = '${hodID}'";
+                        $result = $conn->query($sql);
+                        $data = $result->fetch_assoc();
+                        $hodNAME = $data['hod_FIRST_NAME'] . ' ' . $data['hod_LAST_NAME'];
+                        echo"
+                            <td>${hodNAME}</td>
+                            <td>${professor}</td>
+                        ";
+                        if($status == 0){
+                            echo "<td>PENDING</td>";
+                        }elseif($status == 1){
+                            echo "<td>ACCEPTED</td>";
+                        }else{
+                            echo "<td>REJECTED</td>";
+                        }
+                        echo"
+                            <td>${comment}</td>
+                            <td>${course}</td>
+                            <td>${batch}</td>
                         </tr>
                         ";
                     }

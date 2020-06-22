@@ -1,6 +1,11 @@
 <?php
     session_start();
     require_once('../server/connection.php');
+    $id = $_SESSION['id'];
+    $sql = "SELECT `hod_FIRST_NAME` , `hod_LAST_NAME` FROM `hod_record` WHERE `hod_ID` = '${id}'";
+    $result = $conn->query($sql);
+    $data = $result->fetch_assoc();
+    $hodNAME = $data['hod_FIRST_NAME'] . " " . $data['hod_LAST_NAME'];
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +20,10 @@
 <body>
     <div class="container container-fluid">
         <div class="jumbotron">
-            <h2 class="center">HOD Dashboard</h2>
+            <h2 class="center">
+                HOD Dashboard
+            </h2>
+            <small class="right">Welcome <?php echo $hodNAME?> </small>
         </div>
         <nav class='right'><form action="#" method="post"><input type="submit" value="Log Out" name="logout" class="btn btn-outline-danger"></form></nav>
         <br><br><br>

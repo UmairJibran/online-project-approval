@@ -48,6 +48,7 @@
                 if($rows == 1){
                     $_SESSION['logged_in'] = true;
                     $_SESSION['role'] = 'hod';
+                    $_SESSION['id'] = $id;
                     header("Location: ./../hod/");
                 } else {
                     echo 'false';
