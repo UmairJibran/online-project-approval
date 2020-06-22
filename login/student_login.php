@@ -24,7 +24,7 @@
         </nav>
         <br><br>
         <div class="center-half">
-            <form>
+            <form method="POST" action="#">
                 <div class="form-group">
                     <label for="studentID" class="left">Student ID</label>
                     <input type="number" name="studentID" class="form-control" id="studentID" required>
@@ -50,8 +50,11 @@
         $sid = $_POST["studentID"];
         $pwd = $_POST["pwd"];
         $query = "SELECT * WHERE `student_ID` = '${sid}' AND `student_PASSWORD` = '${pwd}'";
-        if ($conn->query($query) === TRUE) {
-            $studentEmail = "";
+        $result = $conn->query($query);
+        $rows = $result->num_rows;
+        if ($rows == 1) {
+            $data = $result->fetch_assoc();
+            $studentEmail = $data["student_EMAIL"];
             setcookie("student_email","${studentEmail}",time()+3600);
             setcookie("logged_in",true,time()+3600);
             print $_COOKIE["student_email"];
