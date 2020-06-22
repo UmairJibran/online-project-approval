@@ -24,7 +24,11 @@
             <small class="right"><?php echo "Welcome " . $studentName ?></small>
         </div>
         <nav class="right">
-            <form action="#" method="post"><input type="submit" value="Add New Project" class="btn btn-outline-success" name="add">&nbsp<input type="submit" value="Log Out" class="btn btn-outline-danger" name="logout"></form><br><br><br>
+            <form action="#" method="post">
+                <input type="submit" value="Add New Project" class="btn btn-outline-success" name="add">
+                &nbsp
+                <input type="submit" value="Log Out" class="btn btn-outline-danger" name="logout">
+            </form><br><br><br>
         </nav>
         <table class="table">
             <tr>

@@ -66,6 +66,74 @@
                 }
             ?>
         </table>
+        <table class="table">
+        <caption  class='center'>Approve Projects</caption>
+            <tr>
+                <th>Project Title</th>
+                <th>Project Year</th>
+                <th>Project Professor(assigned)</th>
+                <th>Project Status</th>
+                <th>Project Comment</th>
+                <th>Project Course</th>
+                <th>Project Batch</th>
+                <th>Project FILE</th>
+            </tr>
+            <?php
+                $sql = "SELECT * FROM `project_record` WHERE `hod_ID` = '${id}';";
+                $result = $conn->query($sql);
+                $rows = $result->num_rows;
+                if($rows >= 1){
+                    while($data = $result->fetch_assoc()){
+                        $title = $data['project_TITLE'];
+                        $year = $data['project_YEAR'];
+                        $hodID = $data['hod_ID'];
+                        $professor = $data['project_PROFESSOR'];
+                        $status = $data['project_STATUS'];
+                        $comment = $data['project_COMMENT'];
+                        $course = $data['project_COURSE'];
+                        $batch = $data['project_BATCH'];
+                        $file = $data['project_file'];
+                        echo"
+                        <tr>
+                            <td>${title}</td>
+                            <td>${year}</td>";
+                        ?>
+                        <form action="#" method="post">
+                        <?php
+                            echo'
+                            <td>
+                                <input type="text" name="prof" placeholder="Assign Professor" required> 
+                            </td>
+                            <td><select name="status" class="form-control">
+                                <option value="0">LEAVE</option>
+                                <option value="1">ACCEPT</option>
+                                <option value="2">REJECT</option>
+                            </select></td>
+                            <td><input type="text" name="comment"  placeholder="Leave Remarks" required></td>
+                            ';
+                            echo"
+                                <td>${course}</td>
+                                <td>${batch}</td>
+                                <td>${file}</td>
+                                <td><input type='submit' name='update' class='btn btn-primary'></td>";
+                                ?>
+                                </form>
+                                <?php
+                                if(isset($_POST['update'])){
+                                    $prof = $_POST['prof'];
+                                    $status = $_POST['status'];
+                                    $comment = $_POST['comment'];
+                                    $sql = "UPDATE `project_record` SET `project_PROFESSOR` = '${prof}', `project_STATUS` = '${status}' , `project_COMMENT` = '${comment}' WHERE `project_record`.`project_ID` = 1;";
+                                    $conn->query($sql);
+                                }
+                        echo "</tr>";
+
+                    }
+                }else{
+                    echo '<div class="alert alert-success center" role="alert" >No Project Waiting for Approval</div>';
+                }
+            ?>
+        </table>
     </div>
 </body>
 </html>
