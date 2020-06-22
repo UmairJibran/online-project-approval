@@ -1,5 +1,9 @@
 <?php
+    session_start();
     require_once("../server/connection.php");
+    if(isset($_SESSION['id'])){
+        header("location:./student/");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -56,12 +60,13 @@
                 $sql = "INSERT INTO `student_record` (`student_ID`, `student_EMAIL`, `student_FIRST_NAME`, `student_LAST_NAME`, `student_PASSWORD`) VALUES (NULL, '${email}', '${fName}', '${lName}', '${pwd}')";
                 if ($conn->query($sql) === TRUE) {
                     $last_id = $conn->insert_id;
-                    echo '<div class="alert alert-success center" role="alert">Account Created Successfully, Your ID is: '.$last_id.'</div>';
                     $_SESSION['logged_in'] = true;
                     $_SESSION['role'] = 'student';
                     $_SESSION['fname'] = $fName;
                     $_SESSION['lname'] = $lName;
                     $_SESSION['email'] = $email;
+                    $_SESSION['id'] = $last_id;
+                    echo '<div class="alert alert-success center" role="alert">Account Created Successfully, Your ID is: '.$_SESSION['id'].'</div>';
                 } else {
                     echo '<div class="alert alert-danger center" role="alert" >'. $conn->error .'</div>';
                 }
