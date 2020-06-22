@@ -51,7 +51,17 @@
                 if($rows == 1){
                     $_SESSION['logged_in'] = true;
                     $_SESSION['role'] = 'student';
-                    header("Location: ./../student/");
+                    $_SESSION['id'] = $id;
+                    $id = $_SESSION['id'];
+                    $sql = "SELECT `status` FROM `student_record` WHERE `student_ID` = ${id}";
+                    $result = $conn->query($sql);
+                    $data = $result->fetch_assoc();
+                    $status = $data['status'];
+                    if($status){
+                        header("Location: ./../student/");
+                    }
+                    else
+                        echo '<div class="alert alert-danger center" role="alert" >Account Not YET VERIFIED BY HOD</div>';
                 } else {
                     echo 'false';
                     echo '<div class="alert alert-danger center" role="alert" >'. $conn->error .'</div>';

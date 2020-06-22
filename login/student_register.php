@@ -64,7 +64,7 @@
                     $_SESSION['email'] = $email;
                     $_SESSION['id'] = $last_id;
                     echo '<div class="alert alert-success center" role="alert">Account Created Successfully, Your ID is: '.$_SESSION['id'].'</div>';
-                    header("Location: ./../student/");
+                    echo '<div class="alert alert-success center" role="alert">Your Application is Now waiting for Approval by HOD</div>';
                 } else {
                     echo '<div class="alert alert-danger center" role="alert" >'. $conn->error .'</div>';
                 }

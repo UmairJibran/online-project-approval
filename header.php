@@ -3,7 +3,15 @@
         echo "session set";
         switch($_SESSION['role']){
             case 'student':{
-                header("Location: ../student/");
+                $id = $_SESSION['id'];
+                $sql = "SELECT `status` FROM `student_record` WHERE `student_ID` = ${id}";
+                $result = $conn->query($sql);
+                $data = $result->fetch_assoc();
+                $status = $data['status'];
+                if($status)
+                    header("Location: ../student/");
+                else
+                    echo '<center>ACCOUNT ISN\'T APPROVED YET!</center>';
                 break;
             }
             case 'hod':{
