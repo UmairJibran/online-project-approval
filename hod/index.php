@@ -1,8 +1,8 @@
 <?php
     session_start();
     require_once('../server/connection.php');
-    $id = $_SESSION['id'];
-    $sql = "SELECT `hod_FIRST_NAME` , `hod_LAST_NAME` FROM `hod_record` WHERE `hod_ID` = '${id}'";
+    $hodID = $_SESSION['id'];
+    $sql = "SELECT `hod_FIRST_NAME` , `hod_LAST_NAME` FROM `hod_record` WHERE `hod_ID` = '${hodID}'";
     $result = $conn->query($sql);
     $data = $result->fetch_assoc();
     $hodNAME = $data['hod_FIRST_NAME'] . " " . $data['hod_LAST_NAME'];
@@ -79,9 +79,10 @@
                 <th>Project Batch</th>
             </tr>
             <?php
-                $sql = "SELECT * FROM `project_record` WHERE `hod_ID` = '${id}';";
+                $sql = "SELECT * FROM `project_record` WHERE `hod_ID` = '${hodID}';";
                 $result = $conn->query($sql);
                 $rows = $result->num_rows;
+                echo $rows;
                 if($rows >= 1){
                     while($data = $result->fetch_assoc()){
                         $prID = $data['project_ID'];
