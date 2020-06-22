@@ -21,16 +21,16 @@
             </h3>
         </div>
         <section class="form">
-            <form action="./" method="post">
-            <div class="form-group row">
+            <form action="#" method="post" enctype="multipart/form-data">
+                <div class="form-group row">
                     <input type="text" name="title" class="form-control col-5" placeholder="Project Title" required>
                     &emsp;&emsp;&emsp;&emsp;
-                    <input type="number" name="batch" class="form-control col-6" placeholder="Project Batch" required>
+                    <input type="number" name="batch" class="form-control col-6" placeholder="Project Batch" required >
                 </div>
                 <div class="form-group row">
                     <input type="text" name="course" class="form-control col-5" placeholder="Project Course" required>
                     &emsp;&emsp;&emsp;&emsp;
-                    <input type="text" name="prof" class="form-control col-6" placeholder="Project Professor" required>
+                    <input type="text" readonly class="form-control col-6" placeholder="Your Student ID is: <?php echo $stID?>">
                 </div>
                 <div class="form-group row">
                     <select name="year" class="form-control col-3">
@@ -64,8 +64,64 @@
                         <input type="text" class="form-control" placeholder="Professor will be assigned by HOD after reading the Project" readonly>
                     </div>  
                 </div>
+                <div class="form-group row">
+                    <label for="hod" class="col-1 col-form-label">HOD</label>
+                    <select name="hod" class="col-5 form-control">
+                        <?php
+                            $sql = "SELECT `hod_ID` , `hod_FIRST_NAME` , `hod_LAST_NAME` FROM `hod_record`;";
+                            $result = $conn->query($sql);
+                            $rows = $result->num_rows;
+                            if($rows >= 1){
+                                while($data = $result->fetch_assoc()){
+                                    $id = $data['hod_ID'];
+                                    $name = $data['hod_FIRST_NAME'] . " " . $data['hod_LAST_NAME'];
+                                    echo "<option value='${id}'>${name}</option>";
+                                }
+                            }
+                        ?>  
+                    </select>
+                    &emsp;&emsp;&emsp;
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                </div>
+                <input type="submit" name="propose" value="Propose" class="btn btn-outline-primary right">
             </form>
         </section>
     </div>
 </body>
 </html>
+
+<?php
+        if(isset($_POST['propose'])){
+            $title= $_POST['title'];
+            $batch= $_POST['batch'];
+            $course= $_POST['course'];
+            $year= $_POST['year'];
+            $hod= $_POST['hod'];
+            $document = '';
+            $file = $_FILES['fileToUpload'];
+            $fileName = $file['name'];
+            $fileTempName = $file['tmp_name'];
+            $fileSize = $file['size'];
+            $fileError = $file['error'];
+            $fileType = $file['type'];
+            $fileExt = explode('.',$fileName);
+            $fileActulaExtension = strtolower(end($fileExt));
+            $allowed = array('pdf','doc','txt');
+            if(in_array($fileActulaExtension,$allowed)){
+                if($fileError === 0){
+                    if($fileSize < 5000000){
+                        $fileNameNew = uniqid('',true) . '.' . $fileActulaExtension;
+                        $fileDestination = '../server/uploads/'.$fileNameNew;
+                        move_uploaded_file($fileTempName,$fileDestination);
+                        $document = $fileDestination;
+                    }
+                }
+            }
+            $sql = "INSERT INTO `project_record` (`project_ID`, `student_ID`, `hod_ID`, `project_TITLE`, `project_YEAR`, `project_PROFESSOR`, `project_BATCH`, `project_COURSE`, `project_COMMENT`, `project_STATUS`, `project_file`) VALUES (NULL, '${stID}', '${hod}', '${title}', '${year}', NULL, '${batch}', '${course}', NULL, '0', '${document}')";
+            if($conn->query($sql) === true){
+                header("Location: ./");
+            }else{
+                echo '<div class="alert alert-danger center" role="alert" >'. $conn->error .'</div>';
+            }
+        }
+?>
