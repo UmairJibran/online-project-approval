@@ -62,7 +62,7 @@
                         }
                     }
                 }else{
-                    echo '<div class="alert alert-success center" role="alert" >No Student Waiting for Approval</div>';
+                    echo '<tr><td colspan="4"><div class="alert alert-success center" role="alert" >No Student Waiting for Approval</div></td></tr>';
                 }
             ?>
         </table>
@@ -82,7 +82,6 @@
                 $sql = "SELECT * FROM `project_record` WHERE `hod_ID` = '${hodID}';";
                 $result = $conn->query($sql);
                 $rows = $result->num_rows;
-                echo $rows;
                 if($rows >= 1){
                     while($data = $result->fetch_assoc()){
                         $prID = $data['project_ID'];
@@ -97,7 +96,7 @@
                         $file = $data['project_file'];
                         echo"
                         <tr>
-                            <td>${title} ${prID}</td> 
+                            <td>${title}</td> 
                             <td> <a href = ${file} class='btn btn-info' download>Download</a></td>";
                             echo"<td>${year}</td>";
                         ?>
