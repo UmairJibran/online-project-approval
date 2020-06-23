@@ -63,7 +63,7 @@
                     else
                         echo '<div class="alert alert-danger center" role="alert" >Account Not YET VERIFIED BY HOD</div>';
                 } else {
-                    echo '<div class="alert alert-danger center" role="alert" >'. $conn->error .'</div>';
+                    echo '<div class="alert alert-danger center" role="alert" >Student with this credentials wasn\'t found</div>';
                 }
                 $conn->close();
             }
