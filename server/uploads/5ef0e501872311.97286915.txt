@@ -1,1 +1,0 @@
-addedBy,affordability,catID,complexity,isHalal,isVegan,isVegitarian,mealID,mealImageUrl,mealIngredients[],mealName,prepSteps[],prepTime,serving,timeStamp
