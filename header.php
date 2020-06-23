@@ -1,6 +1,5 @@
 <?php
     if(isset($_SESSION['role'])){
-        echo "session set";
         switch($_SESSION['role']){
             case 'student':{
                 $id = $_SESSION['id'];
@@ -10,8 +9,6 @@
                 $status = $data['status'];
                 if($status)
                     header("Location: ../student/");
-                else
-                    echo '<center>ACCOUNT ISN\'T APPROVED YET!</center>';
                 break;
             }
             case 'hod':{

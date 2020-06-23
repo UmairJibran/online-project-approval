@@ -131,7 +131,7 @@
 
                     }
                 }else{
-                    echo '<div class="alert alert-success center" role="alert" >No Project Waiting for Approval</div>';
+                    echo '<tr><td colspan="8"><div class="alert alert-success center" role="alert" >No Project Waiting for Approval</div></td></tr>';
                 }
             ?>
         </table>

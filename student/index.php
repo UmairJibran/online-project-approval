@@ -86,7 +86,7 @@
                         ";
                     }
                 }else{
-                    echo '<br><br><br><br><div class="alert alert-danger center" role="alert" >You Have No Project</div>';
+                    echo '<br><br><br><br><tr><td colspan="8"><div class="alert alert-danger center" role="alert" >You Have No Project</div></td></tr>';
                 }
             ?>
         </table>
