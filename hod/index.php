@@ -77,6 +77,7 @@
                 <th>Project Comment</th>
                 <th>Project Course</th>
                 <th>Project Batch</th>
+                <th>Action</th>
             </tr>
             <?php
                 $sql = "SELECT * FROM `project_record` WHERE `hod_ID` = '${hodID}';";
@@ -88,6 +89,7 @@
                         $title = $data['project_TITLE'];
                         $year = $data['project_YEAR'];
                         $hodID = $data['hod_ID'];
+                        $stdID = $data['student_ID'];
                         $professor = $data['project_PROFESSOR'];
                         $status = $data['project_STATUS'];
                         $comment = $data['project_COMMENT'];
@@ -116,6 +118,7 @@
                             echo"
                                 <td>${course}</td>
                                 <td>${batch}</td>
+                                <td><a href='./../chat/index.php?hodID=${hodID}&stdID=${stdID}' class='btn btn-primary'>Chat</a></td>
                                 <td><input type='submit' name='update${prID}' class='btn btn-primary'></td>";
                                 ?>
                                 </form>
