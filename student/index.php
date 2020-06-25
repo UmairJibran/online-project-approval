@@ -1,6 +1,6 @@
 <?php
-    session_start();
     require_once('../server/connection.php');
+    session_start();
     $stID = $_SESSION['id'];
     $sql = "SELECT `student_FIRST_NAME` , `student_LAST_NAME` FROM `student_record` WHERE `student_ID` = '${stID}'";
     $result = $conn->query($sql);
@@ -83,12 +83,12 @@
                             <td>${comment}</td>
                             <td>${course}</td>
                             <td>${batch}</td>
-                            <td><a href='./.././' class='btn btn-primary'>Chat</a></td>
+                            <td><a href='./../chat/index.php?hodID=${hodID}&stdID=${stID}' class='btn btn-primary'>Chat</a></td>
                         </tr>
                         ";
                     }
                 }else{
-                    echo '<br><br><br><br><tr><td colspan="8"><div class="alert alert-danger center" role="alert" >You Have No Project</div></td></tr>';
+                    echo '<br><br><br><br><tr><td colspan="9"><div class="alert alert-danger center" role="alert" >You Have No Project</div></td></tr>';
                 }
             ?>
         </table>
