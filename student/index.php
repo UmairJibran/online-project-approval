@@ -42,6 +42,7 @@
                 <th>Project Comment</th>
                 <th>Project Course</th>
                 <th>Project Batch</th>
+                <th>Action</th>
             </tr>
             <?php
                 $sql = "SELECT * FROM `project_record` WHERE `student_ID` = '${stID}';";
@@ -82,6 +83,7 @@
                             <td>${comment}</td>
                             <td>${course}</td>
                             <td>${batch}</td>
+                            <td><a href='./.././' class='btn btn-primary'>Chat</a></td>
                         </tr>
                         ";
                     }
