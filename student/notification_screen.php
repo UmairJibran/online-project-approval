@@ -45,10 +45,10 @@
                         <td>${count}</td>
                         <td><span class='mt-5 alert alert-warning center' role='alert'>`Project ${title}`
                     ";
-                    if($data1['project_STATUS'] === true){
-                        echo " ACCEPTED";
+                    if($data1['project_STATUS'] == 1){
+                        echo "<font color='green'><strong> ACCEPTED</strong></font>";
                     }else{
-                        echo " REJECTED";
+                        echo "<font color='red'><strong> REJECTED</strong></font>";
                     }
                     echo"
                         </span></td>
@@ -56,7 +56,7 @@
                         </tr>
                     ";
                     if(isset($_POST['seen'.$notID])){
-                        $sql2 = "UPDATE `project_notification` SET `seen` = '0' WHERE `project_notification`.`notification_id` = ${notID};";
+                        $sql2 = "UPDATE `project_notification` SET `seen` = '1' WHERE `project_notification`.`notification_id` = ${notID};";
                         $conn->query($sql2);
                         header('location:./notification_screen.php');
                     }

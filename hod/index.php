@@ -109,7 +109,6 @@
                                 <input type='text' name='prof${prID}' placeholder='Assign Professor' value='${professor}' required> 
                             </td>
                             <td><select name='status${prID}' class='form-control'>
-                                <option value='0'>LEAVE</option>
                                 <option value='1'>ACCEPT</option>
                                 <option value='2'>REJECT</option>
                             </select></td>
@@ -128,6 +127,8 @@
                                     $status = $_POST['status'.$prID];
                                     $comment = $_POST['comment'.$prID];
                                     $sql = "UPDATE `project_record` SET `project_PROFESSOR` = '${prof}', `project_STATUS` = '${status}' , `project_COMMENT` = '${comment}' WHERE `project_record`.`project_ID` = ${prID};";
+                                    $conn->query($sql);
+                                    $sql = "INSERT INTO `project_notification` (`notification_id`, `project_id`, `student_id`, `hod_id`) VALUES (NULL, '${prID}', '${stdID}', '${hodID}')";
                                     $conn->query($sql);
                                 }
                         echo "</tr>";
