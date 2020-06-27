@@ -25,6 +25,20 @@
         </div>
         <nav class="right">
             <form action="#" method="post">
+                <?php
+                    $sql="SELECT * FROM `project_notification` WHERE `student_id` = ${stID} AND `seen` = 0";
+                    $result = $conn->query($sql);
+                    $rows = $result->num_rows;
+                    echo "<a href='./notification_screen.php' class='btn btn-outline-warning'>";
+                    if($rows>=1){
+                        $count = 0;
+                        while($result->fetch_assoc()){$count+=1;}
+                        echo "<font color='red'>".$count." New </font> ";
+                    }
+                    echo "Notifications</a>";
+                ?>
+                
+                &nbsp
                 <input type="submit" value="View All Projects" class="btn btn-outline-dark" name="viewall">
                 &nbsp
                 <input type="submit" value="Add New Project" class="btn btn-outline-success" name="add">
