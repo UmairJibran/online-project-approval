@@ -20,7 +20,7 @@
         </div>
         <a href="./" class="btn btn-primary mb-3">Go Back</a>
         <?php
-            $sql = "SELECT * FROM `project_notification` WHERE `student_id` = '${stdID}' AND `seen` = 1";
+            $sql = "SELECT * FROM `project_notification` WHERE `student_id` = '${stdID}' AND `seen` = 0";
             $result = $conn->query($sql);
             $rows = $result->num_rows;
             if($rows>=1){
