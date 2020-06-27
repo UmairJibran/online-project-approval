@@ -117,8 +117,7 @@
                         $sql = "INSERT INTO `project_record` (`project_ID`, `student_ID`, `hod_ID`, `project_TITLE`, `project_YEAR`, `project_PROFESSOR`, `project_BATCH`, `project_COURSE`, `project_COMMENT`, `project_STATUS`, `project_file`) VALUES (NULL, '${stID}', '${hod}', '${title}', '${year}', NULL, '${batch}', '${course}', NULL, '0', '${document}')";
                         if($conn->query($sql) === true){                    
                             $last_id = $conn->insert_id;
-                            $sql = "INSERT INTO `project_notification` (`notification_id`, `project_id`, `student_id`, `hod_id`)
-                            VALUES (NULL, '${last_id}', '${stID}', '${hod}')";
+                            $sql = "INSERT INTO `project_notification` (`notification_id`, `project_id`, `student_id`, `hod_id`) VALUES (NULL, '${last_id}', '${stID}', '${hod}')";
                             if($conn->query($sql) === true){
                                 header("Location: ./");
                             }
