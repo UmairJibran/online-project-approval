@@ -36,8 +36,7 @@
                         echo "<font color='red'>".$count." New </font> ";
                     }
                     echo "Notifications</a>";
-                ?>
-                
+                ?>                
                 &nbsp
                 <input type="submit" value="View All Projects" class="btn btn-outline-dark" name="viewall">
                 &nbsp
