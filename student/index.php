@@ -38,9 +38,9 @@
                     echo "Notifications</a>";
                 ?>                
                 &nbsp
-                <a href="./all.php" class="btn btn-outline-dark">View All Projects</a>
+                <a href="./all.php" class="btn btn-outline-dark">View All Projects</a>           
                 &nbsp
-                <input type="submit" value="Add New Project" class="btn btn-outline-success" name="add">
+                <a href="./propose.php" class="btn btn-outline-dark">Add New Project</a>
                 &nbsp
                 <input type="submit" value="Log Out" class="btn btn-outline-danger" name="logout">
             </form><br><br><br>
