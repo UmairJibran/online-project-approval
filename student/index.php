@@ -40,7 +40,7 @@
                 &nbsp
                 <a href="./all.php" class="btn btn-outline-dark">View All Projects</a>           
                 &nbsp
-                <a href="./propose.php" class="btn btn-outline-dark">Add New Project</a>
+                <a href="./propose.php" class="btn btn-outline-success">Add New Project</a>
                 &nbsp
                 <input type="submit" value="Log Out" class="btn btn-outline-danger" name="logout">
             </form><br><br><br>
