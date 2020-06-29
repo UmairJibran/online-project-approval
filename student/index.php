@@ -114,10 +114,4 @@
         session_destroy();
         header("Location: ../");
     }
-    if(isset($_POST['add'])){
-        header("Location: ./propose.php");
-    }
-    if(isset($_POST['viewall'])){
-        header("Location: ./all.php");
-    }
 ?>
