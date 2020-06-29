@@ -32,10 +32,10 @@
                     $currentRole = 's';
                 }
                 if($currentRole === $messageSender)
-                    echo "<div class='container'>";
+                    echo "<div class='container'><p class='right'>";
                 else
-                    echo"<div class='container darker'>";
-                echo "${messageBody}</div>";
+                    echo"<div class='container darker'><p class='left'>";
+                echo "${messageBody}</p></div>";
             }
         }
     ?>
